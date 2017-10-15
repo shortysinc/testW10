@@ -14,7 +14,10 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JLabel;
 import java.awt.Font;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import java.awt.Toolkit;
 
 public class FirstWindow {
 
@@ -51,6 +54,8 @@ public class FirstWindow {
 	 */
 	private void initialize() {
 		MainWindow = new JFrame();
+		ImageIcon img = new ImageIcon("/testW10/CGP.ico");
+		MainWindow.setIconImage(img.getImage());
 		MainWindow.setResizable(false);
 		MainWindow.setName("Perfil W10");
 		MainWindow.setBounds(100, 100, 762, 133);
