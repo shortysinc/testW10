@@ -4,14 +4,19 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JTextField;
-import java.awt.GridLayout;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+
+
 import javax.swing.JLabel;
 import java.awt.Font;
 
 public class FirstWindow {
 
 	private JFrame frame;
-	private JTextField textField;
+	private JTextField enterMachine;
 
 	/**
 	 * Launch the application.
@@ -46,10 +51,18 @@ public class FirstWindow {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		textField = new JTextField();
-		textField.setBounds(121, 11, 330, 20);
-		frame.getContentPane().add(textField);
-		textField.setColumns(10);
+		enterMachine = new JTextField();
+		enterMachine.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e){
+                enterMachine.setText("");
+            }
+        });
+		enterMachine.setText("Please, enter a valid IP...");
+		enterMachine.setBounds(121, 11, 330, 20);
+		frame.getContentPane().add(enterMachine);
+		enterMachine.setColumns(10);
+		
 		
 		JLabel lblNewLabel = new JLabel("IP/MACHINE NAME: ");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 9));
