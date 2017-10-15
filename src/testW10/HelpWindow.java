@@ -5,10 +5,14 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class HelpWindow {
 
-	private JFrame frame;
+	private JFrame frmHelp;
 	private JTextField HelpField;
 
 	/**
@@ -19,7 +23,7 @@ public class HelpWindow {
 			public void run() {
 				try {
 					HelpWindow window = new HelpWindow();
-					window.frame.setVisible(true);
+					window.frmHelp.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -38,18 +42,29 @@ public class HelpWindow {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setResizable(false);
-		frame.setBounds(100, 100, 450, 229);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frmHelp = new JFrame();
+		frmHelp.setTitle("Help?");
+		frmHelp.setIconImage(Toolkit.getDefaultToolkit().getImage(HelpWindow.class.getResource("/testW10/CGP.png")));
+		frmHelp.setResizable(false);
+		frmHelp.setBounds(100, 100, 450, 229);
+		frmHelp.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmHelp.getContentPane().setLayout(null);
 		
 		HelpField = new JTextField();
 		HelpField.setHorizontalAlignment(SwingConstants.CENTER);
 		HelpField.setEditable(false);
-		HelpField.setBounds(10, 11, 424, 178);
-		frame.getContentPane().add(HelpField);
+		HelpField.setBounds(10, 11, 424, 139);
+		frmHelp.getContentPane().add(HelpField);
 		HelpField.setColumns(10);
+		
+		JButton CloseButton = new JButton("Close");
+		CloseButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		CloseButton.setBounds(10, 162, 424, 23);
+		frmHelp.getContentPane().add(CloseButton);
 	}
 
 }

@@ -1,23 +1,8 @@
 package testW10;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JTextField;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
-
-
-import javax.swing.JLabel;
-import java.awt.Font;
-
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import java.awt.Toolkit;
+import javax.swing.*;
+import java.awt.event.*;
+import java.awt.*;
 
 public class FirstWindow {
 
@@ -54,8 +39,8 @@ public class FirstWindow {
 	 */
 	private void initialize() {
 		MainWindow = new JFrame();
-		ImageIcon img = new ImageIcon("/testW10/CGP.png");
-		MainWindow.setIconImage(img.getImage());
+		MainWindow.setTitle("Perfil W10");
+		MainWindow.setIconImage(Toolkit.getDefaultToolkit().getImage(FirstWindow.class.getResource("/testW10/CGP.png")));
 		MainWindow.setResizable(false);
 		MainWindow.setName("Perfil W10");
 		MainWindow.setBounds(100, 100, 762, 133);
