@@ -54,7 +54,7 @@ public class FirstWindow {
 	 */
 	private void initialize() {
 		MainWindow = new JFrame();
-		ImageIcon img = new ImageIcon("/testW10/CGP.ico");
+		ImageIcon img = new ImageIcon("/testW10/CGP.png");
 		MainWindow.setIconImage(img.getImage());
 		MainWindow.setResizable(false);
 		MainWindow.setName("Perfil W10");
