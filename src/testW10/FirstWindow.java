@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -12,11 +14,14 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JLabel;
 import java.awt.Font;
+import javax.swing.JButton;
 
 public class FirstWindow {
 
-	private JFrame frame;
+	private JFrame MainWindow;
 	private JTextField enterMachine;
+	private JTextField txtUser;
+	private JTextField infoExecution;
 
 	/**
 	 * Launch the application.
@@ -26,7 +31,7 @@ public class FirstWindow {
 			public void run() {
 				try {
 					FirstWindow window = new FirstWindow();
-					window.frame.setVisible(true);
+					window.MainWindow.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -45,12 +50,13 @@ public class FirstWindow {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setName("testW10");
-		frame.setBounds(100, 100, 477, 225);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
-		
+		MainWindow = new JFrame();
+		MainWindow.setResizable(false);
+		MainWindow.setName("Perfil W10");
+		MainWindow.setBounds(100, 100, 762, 133);
+		MainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		MainWindow.getContentPane().setLayout(null);
+		/*----------------------------------------------*/
 		enterMachine = new JTextField();
 		enterMachine.addMouseListener(new MouseAdapter(){
             @Override
@@ -59,14 +65,57 @@ public class FirstWindow {
             }
         });
 		enterMachine.setText("Please, enter a valid IP...");
-		enterMachine.setBounds(121, 11, 330, 20);
-		frame.getContentPane().add(enterMachine);
+		enterMachine.setBounds(121, 11, 285, 20);
+		MainWindow.getContentPane().add(enterMachine);
 		enterMachine.setColumns(10);
 		
+		/*----------------------------------------------*/
+		JLabel IPLabel = new JLabel("IP/MACHINE NAME: ");
+		IPLabel.setFont(new Font("Tahoma", Font.BOLD, 9));
+		IPLabel.setBounds(10, 14, 113, 14);
+		MainWindow.getContentPane().add(IPLabel);
+		/*----------------------------------------------*/
+		JLabel UserLabel = new JLabel("User:  ");
+		UserLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
+		UserLabel.setBounds(10, 39, 46, 14);
+		MainWindow.getContentPane().add(UserLabel);
+		/*----------------------------------------------*/
+		txtUser = new JTextField();
+		txtUser.setText("User...");
+		txtUser.setBounds(121, 36, 285, 20);
+		MainWindow.getContentPane().add(txtUser);
+		txtUser.setColumns(10);
+		txtUser.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseClicked(MouseEvent e){
+                txtUser.setText("");
+            }
+        });
+		/*----------------------------------------------*/
+		JButton SendButton = new JButton("Send");
+		SendButton.setBounds(121, 67, 89, 23);
+		MainWindow.getContentPane().add(SendButton);
+		/*----------------------------------------------*/
+		JButton CancelButton = new JButton("Cancel");
+		CancelButton.setBounds(223, 67, 89, 23);
+		MainWindow.getContentPane().add(CancelButton);
+		CancelButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		/*----------------------------------------------*/
+		JButton HelpButton = new JButton("Help?");
+		HelpButton.setFont(new Font("Tahoma", Font.BOLD, 11));
+		HelpButton.setBounds(322, 67, 84, 23);
+		MainWindow.getContentPane().add(HelpButton);
+		/*----------------------------------------------*/
+		infoExecution = new JTextField();
+		infoExecution.setEditable(false);
+		infoExecution.setBounds(423, 11, 322, 79);
+		MainWindow.getContentPane().add(infoExecution);
+		infoExecution.setColumns(10);
 		
-		JLabel lblNewLabel = new JLabel("IP/MACHINE NAME: ");
-		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 9));
-		lblNewLabel.setBounds(10, 14, 113, 14);
-		frame.getContentPane().add(lblNewLabel);
 	}
 }
