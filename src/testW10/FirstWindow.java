@@ -10,7 +10,8 @@ public class FirstWindow {
 	private JTextField enterMachine;
 	private JTextField txtUser;
 	private JTextField infoExecution;
-
+	final String ayuda="Este Script nos permite realizar un perfil remoto de W10.\n 1. Ejecutar como adm. \n 2. Introducir IP. \n 3. Introducir iniciales de usuario.";
+	//ufffffffffff
 	/**
 	 * Launch the application.
 	 */
@@ -100,6 +101,14 @@ public class FirstWindow {
 		HelpButton.setFont(new Font("Tahoma", Font.BOLD, 11));
 		HelpButton.setBounds(322, 67, 84, 23);
 		MainWindow.getContentPane().add(HelpButton);
+		HelpButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+				JOptionPane.showMessageDialog(null,ayuda); 
+			}
+		});
 		/*----------------------------------------------*/
 		infoExecution = new JTextField();
 		infoExecution.setEditable(false);
