@@ -2,6 +2,7 @@ package testW10;
 
 import javax.swing.*;
 import java.awt.event.*;
+import java.io.IOException;
 import java.awt.*;
 
 public class FirstWindow {
@@ -30,15 +31,17 @@ public class FirstWindow {
 
 	/**
 	 * Create the application.
+	 * @throws IOException 
 	 */
-	public FirstWindow() {
+	public FirstWindow() throws IOException {
 		initialize();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
+	 * @throws IOException 
 	 */
-	private void initialize() {
+	private void initialize() throws IOException {
 		MainWindow = new JFrame();
 		MainWindow.setTitle("Perfil W10");
 		MainWindow.setIconImage(Toolkit.getDefaultToolkit().getImage(FirstWindow.class.getResource("/testW10/CGP.png")));
@@ -86,6 +89,14 @@ public class FirstWindow {
 		JButton SendButton = new JButton("Send");
 		SendButton.setBounds(121, 67, 89, 23);
 		MainWindow.getContentPane().add(SendButton);
+		
+		SendButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				JOptionPane.showMessageDialog(null,"Send button not active"); 
+			}
+		});
 		/*----------------------------------------------*/
 		JButton CancelButton = new JButton("Cancel");
 		CancelButton.setBounds(223, 67, 89, 23);
