@@ -4,7 +4,10 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.io.IOException;
 import java.awt.*;
+import org.junit.Assert;
+import org.junit.Test;
 
+@SuppressWarnings("unused")
 public class FirstWindow {
 
 	private JFrame MainWindow;
@@ -94,7 +97,18 @@ public class FirstWindow {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				JOptionPane.showMessageDialog(null,"Send button not active"); 
+				//JOptionPane.showMessageDialog(null,"Send button not active");
+				try {
+					PowerShell ps = PowerShell.openSession();
+					PowerShellResponse psResponse = ps.executeCommand("ls" + " C:\\Security");
+					//JOptionPane.showMessageDialog(null,psResponse.getCommandOutput());
+					System.out.println("List Directory:" + psResponse.getCommandOutput());
+					Assert.assertTrue(psResponse.getCommandOutput().contains("LastWriteTime"));
+			        ps.close();
+				} catch (PowerShellNotAvailableException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 		/*----------------------------------------------*/
@@ -104,7 +118,7 @@ public class FirstWindow {
 		CancelButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
+				System.exit(0); //test
 			}
 		});
 		/*----------------------------------------------*/
@@ -118,6 +132,7 @@ public class FirstWindow {
 			public void actionPerformed(ActionEvent arg0) {
 				
 				JOptionPane.showMessageDialog(null,ayuda); 
+
 			}
 		});
 		/*----------------------------------------------*/
