@@ -100,8 +100,8 @@ public class FirstWindow {
 				//JOptionPane.showMessageDialog(null,"Send button not active");
 				try {
 					PowerShell ps = PowerShell.openSession();
-					PowerShellResponse psResponse = ps.executeCommand("ls" + " C:\\Security");
-					//JOptionPane.showMessageDialog(null,psResponse.getCommandOutput());
+					PowerShellResponse psResponse = ps.executeCommand("ls" + " C:\\");
+					JOptionPane.showMessageDialog(null,psResponse.getCommandOutput());
 					System.out.println("List Directory:" + psResponse.getCommandOutput());
 					Assert.assertTrue(psResponse.getCommandOutput().contains("LastWriteTime"));
 			        ps.close();
