@@ -5,6 +5,9 @@ import java.awt.event.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.awt.*;
 import org.junit.Assert;
 import org.junit.Test;
@@ -116,10 +119,19 @@ public class FirstWindow {
 					String ip=enterMachine.getText();
 					//System.out.println(ip);
 					String user= txtUser.getText();
-					//System.out.println(user);
-					String command = "Rename-Item -path \"\\\\"+ip+"\\c$\\users\\"+user+"\" -NewName \"\\\\$userip\\c$\\users\\$userperf.old\" -force ";
-					Process powerShellProcess = Runtime.getRuntime().exec(command);
-					powerShellProcess.getOutputStream().close();
+					//Aqui habrá que hacer la comprobación equivalente a ps.
+					Path path= Paths.get("C:\\Security\\lol");
+					if (Files.exists(path)) {
+						//System.out.println("Existe la carpeta buscada");
+						infoExecution.setText("Existe la carpeta "+path.toString());
+					}
+					else {
+						infoExecution.setText("No existe la carpeta "+path.toString());
+					}
+					
+					//String command = "Rename-Item -path \"\\\\"+ip+"\\c$\\users\\"+user+"\" -NewName \"\\\\$userip\\c$\\users\\$userperf.old\" -force ";
+					//Process powerShellProcess = Runtime.getRuntime().exec(command);
+					//powerShellProcess.getOutputStream().close();
 					/*
 					String line,newline = "";
 					BufferedReader stdout = new BufferedReader(new InputStreamReader(powerShellProcess.getInputStream()));
