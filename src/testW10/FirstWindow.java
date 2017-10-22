@@ -40,6 +40,18 @@ public class FirstWindow {
 	public FirstWindow() throws IOException {
 		initialize();
 	}
+	
+	private void initializePS() {
+		String command = "powershell.exe Set-ExecutionPolicy Unrestricted CurrentUser -Force";
+		try {		
+			Process powerShellProcess = Runtime.getRuntime().exec(command);
+			powerShellProcess.getOutputStream().close();
+			System.out.println("Execution Policy Updated!");
+		}
+		catch (Exception e){
+			
+		}
+	}
 
 	/**
 	 * Initialize the contents of the frame.
@@ -54,6 +66,7 @@ public class FirstWindow {
 		MainWindow.setBounds(100, 100, 762, 133);
 		MainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		MainWindow.getContentPane().setLayout(null);
+		this.initializePS();
 		/*----------------------------------------------*/
 		enterMachine = new JTextField();
 		enterMachine.addMouseListener(new MouseAdapter(){
@@ -100,10 +113,14 @@ public class FirstWindow {
 			public void actionPerformed(ActionEvent arg0) {
 				//JOptionPane.showMessageDialog(null,"Send button not active");
 				try {
+					String ip=enterMachine.getText();
+					//System.out.println(ip);
+					String user= txtUser.getText();
+					//System.out.println(user);
 					String command = "powershell.exe  $PSVersionTable.PSVersion";
-					/*
 					Process powerShellProcess = Runtime.getRuntime().exec(command);
 					powerShellProcess.getOutputStream().close();
+					/*
 					String line,newline = "";
 					BufferedReader stdout = new BufferedReader(new InputStreamReader(powerShellProcess.getInputStream()));
 					while ((line = stdout.readLine()) != null) {
