@@ -8,5 +8,5 @@ package testW10;
  *
  */
 public enum Comments {
-
+	
 }
