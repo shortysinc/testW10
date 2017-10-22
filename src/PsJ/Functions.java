@@ -1,4 +1,4 @@
-package testW10;
+package PsJ;
 
 public class Functions {
 	

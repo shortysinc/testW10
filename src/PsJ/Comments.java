@@ -1,7 +1,7 @@
 /**
  * 
  */
-package testW10;
+package PsJ;
 
 /**
  * @author Jorge

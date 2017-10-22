@@ -1,4 +1,4 @@
-package testW10;
+package PsJ;
 
 import javax.swing.*;
 import java.awt.event.*;
@@ -55,6 +55,10 @@ public class FirstWindow {
 			
 		}
 	}
+	
+	private boolean existePath (Path pathFolder) {
+		return Files.exists(pathFolder);
+	}
 
 	/**
 	 * Initialize the contents of the frame.
@@ -63,7 +67,7 @@ public class FirstWindow {
 	private void initialize() throws IOException {
 		MainWindow = new JFrame();
 		MainWindow.setTitle("Perfil W10");
-		MainWindow.setIconImage(Toolkit.getDefaultToolkit().getImage(FirstWindow.class.getResource("/testW10/CGP.png")));
+		MainWindow.setIconImage(Toolkit.getDefaultToolkit().getImage(FirstWindow.class.getResource("/PsJ/CGP.png")));
 		MainWindow.setResizable(false);
 		MainWindow.setName("Perfil W10");
 		MainWindow.setBounds(100, 100, 762, 133);
@@ -120,13 +124,9 @@ public class FirstWindow {
 					//System.out.println(ip);
 					String user= txtUser.getText();
 					//Aqui habrá que hacer la comprobación equivalente a ps.
-					Path path= Paths.get("C:\\Security\\lol");
-					if (Files.exists(path)) {
-						//System.out.println("Existe la carpeta buscada");
-						infoExecution.setText("Existe la carpeta "+path.toString());
-					}
-					else {
-						infoExecution.setText("No existe la carpeta "+path.toString());
+					Path path= Paths.get("C:\\Security");
+					if(existePath(path)) {
+						infoExecution.setText("La ruta "+ path.toString() +" no existe");
 					}
 					
 					//String command = "Rename-Item -path \"\\\\"+ip+"\\c$\\users\\"+user+"\" -NewName \"\\\\$userip\\c$\\users\\$userperf.old\" -force ";
