@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.regex.*;
 import java.awt.*;
 import org.junit.Assert;
 import org.junit.Test;
@@ -20,6 +21,17 @@ public class FirstWindow {
 	private JTextField txtUser;
 	private JTextField infoExecution;
 	final String ayuda="Este Script nos permite realizar un perfil remoto de W10.\n 1. Ejecutar como adm. \n 2. Introducir IP. \n 3. Introducir iniciales de usuario.";
+	
+	private Pattern pattern;
+    private Matcher matcher;
+
+    private static final String IPADDRESS_PATTERN =
+		"^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+		"([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+		"([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+		"([01]?\\d\\d?|2[0-4]\\d|25[0-5])$";
+
+	
 	/**
 	 * Launch the application.
 	 */
@@ -41,6 +53,7 @@ public class FirstWindow {
 	 * @throws IOException 
 	 */
 	public FirstWindow() throws IOException {
+		pattern = Pattern.compile(IPADDRESS_PATTERN);
 		initialize();
 	}
 	
@@ -59,6 +72,20 @@ public class FirstWindow {
 	private boolean existePath (Path pathFolder) {
 		return Files.exists(pathFolder);
 	}
+	
+	public boolean validate(final String ip, final String user){
+		  matcher = pattern.matcher(ip);
+		  if(matcher.matches() && !user.equals("")) {
+			  return true;
+		  }
+		  else {
+			  return false;
+		  }
+	}
+
+	
+	
+
 
 	/**
 	 * Initialize the contents of the frame.
@@ -121,11 +148,22 @@ public class FirstWindow {
 				//JOptionPane.showMessageDialog(null,"Send button not active");
 				try {
 					String ip=enterMachine.getText();
-					//System.out.println(ip);
 					String user= txtUser.getText();
-					//Aqui habrá que hacer la comprobación equivalente a ps.
-					Path path= Paths.get("C:\\Security");
+					
+					/**
+					 * Aquí compruebo si el formato de la ipv4 es correcto o si no lo es y de si
+					 * el usuario es correcto o no lo es. Como premisa, tomamos que el usuario no es vacío.
+					 */
+					
+					
+					/*-------------------------------------------------------------------------------------*/
+					Path path= Paths.get("C:\\Security\\TEST1");
 					if(existePath(path)) {
+						String command = "powershell Rename-Item -path " + path.toString() + " -NewName "+ path.toString()+".old" + " -force ";
+						Process powerShellProcess = Runtime.getRuntime().exec(command);
+						powerShellProcess.getOutputStream().close();
+					}
+					else {
 						infoExecution.setText("La ruta "+ path.toString() +" no existe");
 					}
 					
