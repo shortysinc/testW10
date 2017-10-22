@@ -19,7 +19,7 @@ public class FirstWindow {
 	private JFrame MainWindow;
 	private JTextField enterMachine;
 	private JTextField txtUser;
-	private JTextField infoExecution;
+	private JTextArea infoExecution;
 	final String ayuda="Este Script nos permite realizar un perfil remoto de W10.\n 1. Ejecutar como adm. \n 2. Introducir IP. \n 3. Introducir iniciales de usuario.";
 	
 	private Pattern pattern;
@@ -73,7 +73,7 @@ public class FirstWindow {
 		return Files.exists(pathFolder);
 	}
 	
-	public boolean validate(final String ip, final String user){
+	public boolean ipAndUser(final String ip, final String user){
 		  matcher = pattern.matcher(ip);
 		  if(matcher.matches() && !user.equals("")) {
 			  return true;
@@ -149,22 +149,30 @@ public class FirstWindow {
 				try {
 					String ip=enterMachine.getText();
 					String user= txtUser.getText();
+					System.out.println(user);
+					Path path = null;
 					
 					/**
 					 * Aquí compruebo si el formato de la ipv4 es correcto o si no lo es y de si
 					 * el usuario es correcto o no lo es. Como premisa, tomamos que el usuario no es vacío.
 					 */
-					
+					if (ipAndUser(ip, user)) {
+						infoExecution.setText("La ip introducida y el usuario con correctos"+"\n");
+						path= Paths.get("C:\\Security\\"+user);
+					}
+					else {
+						infoExecution.setText("Ip o user incorrectos. Inténtelo de nuevo"+"\n");
+					}
 					
 					/*-------------------------------------------------------------------------------------*/
-					Path path= Paths.get("C:\\Security\\TEST1");
 					if(existePath(path)) {
 						String command = "powershell Rename-Item -path " + path.toString() + " -NewName "+ path.toString()+".old" + " -force ";
 						Process powerShellProcess = Runtime.getRuntime().exec(command);
 						powerShellProcess.getOutputStream().close();
 					}
 					else {
-						infoExecution.setText("La ruta "+ path.toString() +" no existe");
+						infoExecution.append("La ruta "+ path.toString() +" no existe");
+					
 					}
 					
 					//String command = "Rename-Item -path \"\\\\"+ip+"\\c$\\users\\"+user+"\" -NewName \"\\\\$userip\\c$\\users\\$userperf.old\" -force ";
@@ -211,7 +219,7 @@ public class FirstWindow {
 			}
 		});
 		/*----------------------------------------------*/
-		infoExecution = new JTextField();
+		infoExecution = new JTextArea();
 		infoExecution.setEditable(false);
 		infoExecution.setBounds(423, 11, 322, 79);
 		MainWindow.getContentPane().add(infoExecution);
