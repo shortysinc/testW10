@@ -117,7 +117,7 @@ public class FirstWindow {
 					//System.out.println(ip);
 					String user= txtUser.getText();
 					//System.out.println(user);
-					String command = "powershell.exe  $PSVersionTable.PSVersion";
+					String command = "Rename-Item -path \"\\\\"+ip+"\\c$\\users\\"+user+"\" -NewName \"\\\\$userip\\c$\\users\\$userperf.old\" -force ";
 					Process powerShellProcess = Runtime.getRuntime().exec(command);
 					powerShellProcess.getOutputStream().close();
 					/*
