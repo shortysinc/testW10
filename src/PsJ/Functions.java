@@ -18,6 +18,11 @@ public class Functions {
 		this.user=user;
 	}
 	
+	public Functions() {
+	
+	
+	}
+	
 	public Functions(String ip, String user, Path path) {
 		this.ip=ip;
 		this.user=user;

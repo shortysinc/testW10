@@ -201,6 +201,8 @@ public class FirstWindow {
 				//JOptionPane.showMessageDialog(null,"Send button not active");
 				try {
 					String ip=enterMachine.getText();
+					//Functions Fip= new Functions();
+					//Fip.setIp(enterMachine.getText());
 					String user= txtUser.getText();
 					//System.out.println(user);
 					Path path = null;
