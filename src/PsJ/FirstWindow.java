@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.concurrent.ExecutionException;
 import java.util.regex.*;
 import java.awt.*;
 import java.awt.Desktop.Action;
@@ -72,7 +73,7 @@ public class FirstWindow {
 	}
 	
 	
-	private boolean existePath (Path pathFolder) {
+	private boolean existePath (Path pathFolder) throws ExecutionException {
 		return Files.exists(pathFolder);
 	}
 	
@@ -218,8 +219,10 @@ public class FirstWindow {
 					
 					/*-------------------------------------------------------------------------------------*/
 					if(existePath(path)) {
-						 RenameItemPS(ip, user);
-						 deleteProfile(ip, user);
+						 //RenameItemPS(ip, user);
+						Functions fn = new Functions(ip, user);
+						fn.RenameItemPS(ip, user);
+						deleteProfile(ip, user);
 					}
 					else {
 						infoExecution.append("La ruta "+ path.toString() +" no existe");
@@ -275,5 +278,10 @@ public class FirstWindow {
 		MainWindow.getContentPane().add(infoExecution);
 		infoExecution.setColumns(10);
 		
+	}
+	
+	public void setinfoExecution(String txt)
+	{
+		infoExecution.append(txt);
 	}
 }
