@@ -92,6 +92,7 @@ public class FirstWindow {
 		System.out.println("Se ha cambiado la ruta de .old");
 	}
 	*/
+	/*
 	private void RenameItemPS(String ip, String user) {
 		String commandRemote = "powershell Rename-Item -path \"\\\\"+ip+"\\c$\\users\\"+user+"\" -NewName \"\\\\"+ip+"\\c$\\users\\"+user+".old\" -force";
 		//System.out.println(commandRemote);
@@ -122,7 +123,7 @@ public class FirstWindow {
 		}
 	}
 	
-	
+	*/
 
 
 	/**
@@ -224,7 +225,9 @@ public class FirstWindow {
 						 //RenameItemPS(ip, user);
 						Functions fn = new Functions(ip, user);
 						fn.RenameItemPS(ip, user);
-						deleteProfile(ip, user);
+						fn.deleteProfile(ip, user);
+						fn.newItem(ip, user);
+						infoExecution.repaint();
 					}
 					else {
 						infoExecution.append("La ruta "+ path.toString() +" no existe");

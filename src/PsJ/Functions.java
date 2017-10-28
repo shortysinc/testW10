@@ -45,6 +45,43 @@ public class Functions {
 			e.getStackTrace();
 		}
 	}
+	
+	public void deleteProfile(String ip, String user) {
+		//String commandRemote = "powershell \"Get-WmiObject -ComputerName "+ip+" -Class Win32_Userprofile | where {($_.localpath -eq \"c:\\Users\\"+user+"\")}| Remove-WmiObject\"";
+		String commandRemote = "powershell -file /PsJ/PerfilW10.ps1+"+ip+" "+user;
+		System.out.println(commandRemote);
+		//String command = "powershell Rename-Item -path " + path.toString() + " -NewName "+ path.toString()+".old" + " -force ";
+		try {
+			Process powerShellProcess = Runtime.getRuntime().exec(commandRemote);
+			powerShellProcess.getOutputStream().close();
+			FirstWindow fsFirstWindow = new FirstWindow();
+			fsFirstWindow.setinfoExecution("Se ha borrado el perfil del usuario "+user+".");
+			
+		}
+		catch (Exception e) {
+			JOptionPane.showMessageDialog(null,"Ha Habido un fallo al borrar el perfil del usuario "+ user);
+			e.getStackTrace();
+		}
+	}
+	
+	public void newItem(String ip, String user) {
+		//String commandRemote = "powershell \"Get-WmiObject -ComputerName "+ip+" -Class Win32_Userprofile | where {($_.localpath -eq \"c:\\Users\\"+user+"\")}| Remove-WmiObject\"";
+		String commandRemote = "powershell new-Item \"\\\\"+ip+"\\c$\\users\\"+user+"\" -type Directory";
+		System.out.println(commandRemote);
+		//String command = "powershell Rename-Item -path " + path.toString() + " -NewName "+ path.toString()+".old" + " -force ";
+		//New-Item C:\Security\pepe -Type Directory
+		try {
+			Process powerShellProcess = Runtime.getRuntime().exec(commandRemote);
+			powerShellProcess.getOutputStream().close();
+			FirstWindow fsFirstWindow = new FirstWindow();
+			fsFirstWindow.setinfoExecution("Se ha creado otra carpeta del usuario "+user+".");
+			
+		}
+		catch (Exception e) {
+			JOptionPane.showMessageDialog(null,"Ha Habido un fallo al borrar el perfil del usuario "+ user);
+			e.getStackTrace();
+		}
+	}
 
 	/**
 	 * @return the ip
